@@ -125,8 +125,7 @@ function repeatString(value, count) {
  */
 function removeFirstOccurrences(str, value) {
   return (
-    str.substring(0, str.indexOf(value)) +
-    str.substring(str.indexOf(value) + value.length)
+    str.substring(0, str.indexOf(value)) + str.substring(str.indexOf(value) + value.length)
   );
 }
 
@@ -208,13 +207,13 @@ function getRectangleString(width, height) {
 
   let result = '';
 
-  for (let i = 0; i < height; i++) {
+  for (let i = 0; i < height; i += 1) {
     if (i === 0) {
-      result += '┌' + '─'.repeat(width - 2) + '┐\n';
+      result += `┌${'─'.repeat(width - 2)}┐\n`;
     } else if (i === height - 1) {
-      result += '└' + '─'.repeat(width - 2) + '┘\n';
+      result += `└${'─'.repeat(width - 2)}┘\n`;
     } else {
-      result += '│' + ' '.repeat(width - 2) + '│\n';
+      result += `│${' '.repeat(width - 2)}│\n`;
     }
   }
 
@@ -243,11 +242,14 @@ function encodeToRot13(str) {
     .map((item) => {
       if (item.charCodeAt(0) >= 65 && item.charCodeAt(0) <= 77) {
         return String.fromCharCode(item.charCodeAt() + 13);
-      } else if (item.charCodeAt(0) >= 78 && item.charCodeAt(0) <= 90) {
+      }
+      if (item.charCodeAt(0) >= 78 && item.charCodeAt(0) <= 90) {
         return String.fromCharCode(item.charCodeAt() - 13);
-      } else if (item.charCodeAt(0) >= 97 && item.charCodeAt(0) <= 109) {
+      }
+      if (item.charCodeAt(0) >= 97 && item.charCodeAt(0) <= 109) {
         return String.fromCharCode(item.charCodeAt() + 13);
-      } else if (item.charCodeAt(0) >= 110 && item.charCodeAt(0) <= 122) {
+      }
+      if (item.charCodeAt(0) >= 110 && item.charCodeAt(0) <= 122) {
         return String.fromCharCode(item.charCodeAt() - 13);
       }
       return item;
@@ -270,8 +272,7 @@ function encodeToRot13(str) {
  */
 function isString(value) {
   return (
-    typeof value === 'string' ||
-    (typeof value === 'object' && value instanceof String)
+    typeof value === 'string' || (typeof value === 'object' && value instanceof String)
   );
 }
 

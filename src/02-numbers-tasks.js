@@ -68,7 +68,7 @@ function getAverage(value1, value2) {
  *   (0,0) (1,0)    => 1
  *   (-5,0) (10,-10) => 18.027756377319946
  */
-function getDistanceBetweenPoints(/* x1, y1, x2, y2 */) {
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
   const deltaX = Math.abs(x1 - x2);
   const deltaY = Math.abs(y1 - y2);
 
@@ -90,7 +90,9 @@ function getDistanceBetweenPoints(/* x1, y1, x2, y2 */) {
 function getLinearEquationRoot(a, b) {
   if (a === 0) {
     return 0;
-  } else if (b === 0 || b === undefined) {
+  }
+
+  if (b === 0 || b === undefined) {
     return 0;
   }
 
@@ -116,10 +118,8 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  return Math.acos(
-    (x1 * x2 + y1 * y2) /
-      (Math.sqrt(x1 ** 2 + y1 ** 2) * Math.sqrt(x2 ** 2 + y2 ** 2))
-  );
+  const x = x1 * x2 + y1 * y2;
+  return Math.acos(x / (Math.sqrt(x1 ** 2 + y1 ** 2) * Math.sqrt(x2 ** 2 + y2 ** 2)));
 }
 
 /**
@@ -135,10 +135,10 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-  return +('' + value).at(-1);
+  return +(String(value)).at(-1);
 }
 
-/**
+/*
  * Returns a number by given string representation.
  *
  * @param {string} value
@@ -213,7 +213,7 @@ function isPrime(n) {
     return false;
   }
 
-  for (let i = 2; i <= Math.sqrt(n); i++) {
+  for (let i = 2; i <= Math.sqrt(n); i += 1) {
     if (n % i === 0) {
       return false;
     }
@@ -237,7 +237,7 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-  if (!isNaN(value)) {
+  if (!Number.isNaN(Number(value))) {
     return +value;
   }
   return def;
